@@ -1,0 +1,40 @@
+name: tmpl8 testing pipeline
+on:
+  push:
+    branches: ['main']
+
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        py-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python ${{ matrix.py-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.py-version }}
+
+      - name: Install tmpl8
+        run: pip install .[dev]
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python 3.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
+
+      - name: Install tmpl8
+        run: pip install .[dev]
+
+      - name: Run flake8
+        run: flake8 tmpl8
