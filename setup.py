@@ -1,12 +1,16 @@
-from importlib.metadata import entry_points
 from setuptools import setup
 from tmpl8 import __version__
+
+install_requires = [
+    'pyyaml'
+    ]
 
 setup_options = dict(
     name='tmpl8',
     version=__version__,
     description="Templating wrapper for CLI commands",
     author="Matthew Altberg",
+    install_requires=install_requires,
     entry_points={
         'console_scripts': [
             'tmpl8=tmpl8.cli:main'
