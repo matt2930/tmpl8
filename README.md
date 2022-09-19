@@ -18,3 +18,18 @@ optional arguments:
   -h, --help     show this help message and exit
   -v, --version  show program's version number and exit
 ```
+
+### Example Usages
+```
+$ tmpl8 kubectl apply -f file.yml
+
+Running 'kubectl apply -f /tmp/dir/file.yml'
+
+<output from kubectl command>
+
+$ tmpl8 docker build -t test:latest -f Dockerfile .
+
+Running 'kubectl apply -t test:latest -f /tmp/dir/Dockerfile /tmp/dir'
+
+<output from docker build>
+```
