@@ -3,6 +3,7 @@ from typing import Optional
 
 from jinja2 import Environment, FileSystemLoader, TemplateNotFound
 
+
 def templateFile(input_path: str, output_path: str, data={}) -> Optional[str]:
 
     full_input_path = os.path.realpath(os.path.expanduser(input_path))

@@ -9,19 +9,42 @@ from tmpl8.template import templateFile
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='tmpl8', description="tmpl8 wrapper for cli commands")
-    parser.add_argument('-v', '--version', action='version', version=__version__)
+    parser = argparse.ArgumentParser(
+        prog='tmpl8',
+        description="tmpl8 wrapper for cli commands"
+    )
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version=__version__
+    )
     command_group = parser.add_argument_group('command')
-    command_group.add_argument('command',
-        help='command to run', nargs=1, default=[])
-    command_group.add_argument('args',
-        nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
+    command_group.add_argument(
+        'command',
+        help='command to run',
+        nargs=1,
+        default=[]
+    )
+    command_group.add_argument(
+        'args',
+        nargs=argparse.REMAINDER,
+        help=argparse.SUPPRESS
+    )
 
     data_group = parser.add_argument_group('data', 'data used when templating')
-    data_group.add_argument('-d', '--data',
-        help='json data for templating. Overwrites data from file if -f/--file is specified', type=validateJsonData)
-    data_group.add_argument('-f', '--file',
-        help='file with data to use for templating', type=validateFile)
+    data_group.add_argument(
+        '-d', '--data',
+        help=(
+            'json data for templating.'
+            'Overwrites data from file if -f/--file is specified'
+        ),
+        type=validateJsonData
+    )
+    data_group.add_argument(
+        '-f', '--file',
+        help='file with data to use for templating',
+        type=validateFile
+    )
 
     args = parser.parse_args()
 

@@ -69,7 +69,8 @@ class Command:
                             file = os.path.join(root, file)
                             ignore_paths = ['pycache', '.terraform']
 
-                            if os.path.isfile(file) and not any(x in file for x in ignore_paths):
+                            if (os.path.isfile(file) and
+                                    not any(x in file for x in ignore_paths)):
                                 dir_files.add(file)
 
                     self.arg_info.append(

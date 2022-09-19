@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from tmpl8 import __version__
 
 install_requires = [
@@ -9,8 +9,9 @@ install_requires = [
 setup_options = dict(
     name='tmpl8',
     version=__version__,
-    description="Templating wrapper for CLI commands",
-    author="Matthew Altberg",
+    description='Templating wrapper for CLI commands',
+    packages=find_packages(include=('tmpl8', 'tmpl8.*')),
+    author='Matthew Altberg',
     install_requires=install_requires,
     extras_require={
         'dev': [
