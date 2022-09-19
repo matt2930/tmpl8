@@ -17,9 +17,9 @@ def main():
         parser.print_help()
         parser.exit(status=1, message='error: missing command\n')
 
-    print(args.command)
-
     command = Command(args.command)
+
+    data = {}
 
     with TemporaryDirectory() as td:
         for arg_info in command.arg_info:
@@ -29,7 +29,12 @@ def main():
                 os.mkdir(dir)
             for file in arg_info.files:
                 arg_info.template_dir = dir
-                arg_info.template_files.append(templateFile(file, dir, {}))
+                arg_info.template_files.append(templateFile(file, dir, data))
 
         command.generateCommand()
-        print(command.new_command)
+        result = command.runNewCommand()
+        if result.returncode == 0:
+            print(result.stdout)
+        else:
+            print(result.stderr)
+            exit(result.returncode)

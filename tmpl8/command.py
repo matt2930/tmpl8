@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
 import glob
 import os
+import subprocess
+import sys
 
 @dataclass
 class ArgInfo:
@@ -23,9 +25,9 @@ class Command:
     def _extractFiles(self) -> set[str]:
         for i, arg in enumerate(self.command):
 
-            arg_check = glob.glob(arg)
+            arg_to_path = glob.glob(os.path.expandvars(arg))
 
-            if not arg_check:
+            if not arg_to_path:
                 self.arg_info.append(
                     ArgInfo(
                         arg=arg,
@@ -33,7 +35,7 @@ class Command:
                     )
                 )
 
-            for path in glob.glob(arg):
+            for path in arg_to_path:
                 path = os.path.realpath(os.path.expanduser(path))
 
                 if 'pycache' in arg:
@@ -87,3 +89,13 @@ class Command:
                 continue
             elif arg_info.arg_type == 'arg':
                 self.new_command.append(arg_info.arg)
+
+
+    def runNewCommand(self):
+        try:
+            result = subprocess.run(self.new_command, capture_output=True, text=True)
+        except KeyboardInterrupt:
+            print('--KeyboardInterrupt--', file=sys.stderr)
+            exit(1)
+
+        return result
