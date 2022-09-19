@@ -4,6 +4,7 @@ import os
 import subprocess
 import sys
 
+
 @dataclass
 class ArgInfo:
     arg: str
@@ -53,7 +54,7 @@ class Command:
                             arg=arg,
                             arg_type='file',
                             path=path,
-                            files= {os.path.abspath(path)}
+                            files={os.path.abspath(path)}
                         )
                     )
 
@@ -66,8 +67,9 @@ class Command:
 
                         for file in files:
                             file = os.path.join(root, file)
+                            ignore_paths = ['pycache', '.terraform']
 
-                            if os.path.isfile(file) and 'pycache' not in file and '.terraform' not in file:
+                            if os.path.isfile(file) and not any(x in file for x in ignore_paths):
                                 dir_files.add(file)
 
                     self.arg_info.append(
@@ -90,10 +92,13 @@ class Command:
             elif arg_info.arg_type == 'arg':
                 self.new_command.append(arg_info.arg)
 
-
     def runNewCommand(self):
         try:
-            result = subprocess.run(self.new_command, capture_output=True, text=True)
+            result = subprocess.run(
+                self.new_command,
+                capture_output=True,
+                text=True
+            )
         except KeyboardInterrupt:
             print('--KeyboardInterrupt--', file=sys.stderr)
             exit(1)

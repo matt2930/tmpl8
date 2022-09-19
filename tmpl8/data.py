@@ -3,13 +3,16 @@ import json
 import os
 import yaml
 
+
 def validateJsonData(value):
     data = json.loads(value)
     return data
 
+
 def validateYamlData(value):
     data = yaml.safe_load(value)
     return data
+
 
 def validateFile(value):
     try:
