@@ -17,7 +17,7 @@ setup_options = dict(
             'pytest',
             'flake8'
         ]
-    }
+    },
     entry_points={
         'console_scripts': [
             'tmpl8=tmpl8.cli:main'
