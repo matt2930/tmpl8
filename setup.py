@@ -2,8 +2,9 @@ from setuptools import setup
 from tmpl8 import __version__
 
 install_requires = [
-    'pyyaml'
-    ]
+    'pyyaml',
+    'jinja2'
+]
 
 setup_options = dict(
     name='tmpl8',

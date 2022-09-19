@@ -1,7 +1,9 @@
 import argparse
+from tempfile import TemporaryDirectory
 
 from tmpl8 import __version__
 from tmpl8.extractor import CommandExtractor
+from tmpl8.template import templateFile
 
 def main():
     parser = argparse.ArgumentParser(prog='tmpl8', description="tmpl8 wrapper for cli commands")
@@ -17,3 +19,10 @@ def main():
     command = CommandExtractor(args.command)
 
     print(command.arg_info)
+
+    with TemporaryDirectory() as td:
+        for arg, info in command.arg_info.items():
+            for file in info['files']:
+                out_file = templateFile(file, td, {})
+                if out_file:
+                    print(out_file)
