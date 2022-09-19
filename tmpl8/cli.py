@@ -1,8 +1,9 @@
 import argparse
-from tempfile import TemporaryDirectory
+import os
 
+from tempfile import TemporaryDirectory
 from tmpl8 import __version__
-from tmpl8.extractor import CommandExtractor
+from tmpl8.command import Command
 from tmpl8.template import templateFile
 
 def main():
@@ -16,13 +17,19 @@ def main():
         parser.print_help()
         parser.exit(status=1, message='error: missing command\n')
 
-    command = CommandExtractor(args.command)
+    print(args.command)
 
-    print(command.arg_info)
+    command = Command(args.command)
 
     with TemporaryDirectory() as td:
-        for arg, info in command.arg_info.items():
-            for file in info['files']:
-                out_file = templateFile(file, td, {})
-                if out_file:
-                    print(out_file)
+        for arg_info in command.arg_info:
+            dir = td
+            if arg_info.arg_type == 'dir':
+                dir = os.path.join(td, os.path.basename(arg_info.path))
+                os.mkdir(dir)
+            for file in arg_info.files:
+                arg_info.template_dir = dir
+                arg_info.template_files.append(templateFile(file, dir, {}))
+
+        command.generateCommand()
+        print(command.new_command)
