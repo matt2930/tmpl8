@@ -16,4 +16,4 @@ def main():
 
     command = CommandExtractor(args.command)
 
-    print(command.files)
+    print(command.arg_info)
