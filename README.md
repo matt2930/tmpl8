@@ -39,3 +39,18 @@ Running 'kubectl apply -t test:latest -f /tmp/dir/Dockerfile /tmp/dir'
 
 <output from docker build>
 ```
+
+## For development work
+
+```
+# Install dev packages
+
+pip install -e .[dev]
+
+# Check for correct installation
+pre-commit --version
+
+# Install git hook scripts
+pre-commit install
+
+```

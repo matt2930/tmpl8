@@ -16,7 +16,8 @@ setup_options = dict(
     extras_require={
         'dev': [
             'pytest',
-            'flake8'
+            'flake8',
+            'pre-commit'
         ]
     },
     entry_points={

@@ -23,6 +23,10 @@ jobs:
       - name: Install tmpl8
         run: pip install .[dev]
 
+      # TODO: Add unit testing
+      # - name: Run tests
+      #   run: pytest tests/
+
   lint:
     runs-on: ubuntu-latest
     steps:
