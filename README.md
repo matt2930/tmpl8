@@ -53,4 +53,7 @@ pre-commit --version
 # Install git hook scripts
 pre-commit install
 
+# Run unit tests
+pytest tests
+
 ```
