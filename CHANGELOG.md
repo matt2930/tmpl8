@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.1 (2022-10-05)
+### Fix
+* Incorrect chained commands ([`11fa2b3`](https://github.com/matt2930/tmpl8/commit/11fa2b33a99d45f37c7933bcb616bd67f5749e96))
+
 ## v0.1.0 (2022-10-05)
 ### Feature
 * Add args for data input ([`7cc43bc`](https://github.com/matt2930/tmpl8/commit/7cc43bc91eb62aa030ad942583f109d2137f70d9))
