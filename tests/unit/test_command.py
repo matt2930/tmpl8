@@ -7,6 +7,9 @@ from dataclasses import dataclass
 from tmpl8.command import ArgInfo, ArgType, Command
 
 
+TEST_TEMPLATES_DIR = 'tests/test_templates'
+
+
 class TestCommand:
 
     @dataclass
@@ -49,15 +52,15 @@ class TestCommand:
                 expected_error=ValueError
             ),
             Params(
-                command_list=['ls', 'tests/placeholder_dir/'],
-                expected_new_command=['ls', 'tests/placeholder_dir/'],
+                command_list=['ls', TEST_TEMPLATES_DIR],
+                expected_new_command=['ls', TEST_TEMPLATES_DIR],
                 expected_arg_info=[
                     ArgInfo(arg='ls', arg_type=ArgType.ARG),
                     ArgInfo(
-                        arg='tests/placeholder_dir/',
+                        arg=TEST_TEMPLATES_DIR,
                         arg_type=ArgType.DIR,
-                        path=os.path.abspath('tests/placeholder_dir'),
-                        files={os.path.abspath('tests/placeholder_dir/test.txt')}
+                        path=os.path.abspath(TEST_TEMPLATES_DIR),
+                        files={os.path.abspath(f'{TEST_TEMPLATES_DIR}/test.txt')}
                     )
                 ],
                 expected_command_output='hello'
