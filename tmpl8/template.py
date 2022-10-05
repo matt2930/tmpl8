@@ -1,7 +1,7 @@
 import os
 from typing import Optional
 
-from jinja2 import Environment, FileSystemLoader, TemplateNotFound
+from jinja2 import Environment, FileSystemLoader
 
 
 def templateFile(input_path: str, output_path: str, data={}) -> Optional[str]:
@@ -10,10 +10,8 @@ def templateFile(input_path: str, output_path: str, data={}) -> Optional[str]:
     input_file_dir = os.path.dirname(full_input_path)
     input_file_name = os.path.basename(full_input_path)
     environment = Environment(loader=FileSystemLoader(input_file_dir))
-    try:
-        template = environment.get_template(input_file_name)
-    except TemplateNotFound:
-        return
+
+    template = environment.get_template(input_file_name)
 
     content = template.render(**data)
 

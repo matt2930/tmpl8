@@ -77,8 +77,8 @@ def main():
                 arg_info.template_dir = dir
                 arg_info.template_files.append(templateFile(file, dir, data))
 
-        command.generateCommand()
-        result = command.runNewCommand()
+        result = command.generateCommand().runCommand()
+
         if result.returncode == 0:
             print(result.stdout)
         else:
