@@ -26,6 +26,9 @@ jobs:
       - name: Run tests
         run: pytest tests/unit
 
+      - name: Run integration tests
+        run: pytest tests/integration
+
   lint:
     runs-on: ubuntu-latest
     steps:
