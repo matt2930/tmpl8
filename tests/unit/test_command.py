@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from tmpl8.command import ArgInfo, ArgType, Command
 
 
-TEST_TEMPLATES_DIR = 'tests/test_templates'
+TEST_FILES_DIR = 'tests/test_files'
 
 
 class TestCommand:
@@ -52,15 +52,20 @@ class TestCommand:
                 expected_error=ValueError
             ),
             Params(
-                command_list=['ls', TEST_TEMPLATES_DIR],
-                expected_new_command=['ls', TEST_TEMPLATES_DIR],
+                command_list=['ls', TEST_FILES_DIR],
+                expected_new_command=['ls', TEST_FILES_DIR],
                 expected_arg_info=[
                     ArgInfo(arg='ls', arg_type=ArgType.ARG),
                     ArgInfo(
-                        arg=TEST_TEMPLATES_DIR,
+                        arg=TEST_FILES_DIR,
                         arg_type=ArgType.DIR,
-                        path=os.path.abspath(TEST_TEMPLATES_DIR),
-                        files={os.path.abspath(f'{TEST_TEMPLATES_DIR}/test.txt')}
+                        path=os.path.abspath(TEST_FILES_DIR),
+                        files={
+                            os.path.abspath(f'{TEST_FILES_DIR}/test_template.txt'),
+                            os.path.abspath(f'{TEST_FILES_DIR}/test_data.json'),
+                            os.path.abspath(f'{TEST_FILES_DIR}/test_data.yml'),
+                            os.path.abspath(f'{TEST_FILES_DIR}/test_invalid_data'),
+                        }
                     )
                 ],
                 expected_command_output='hello'
