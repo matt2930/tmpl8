@@ -59,4 +59,5 @@ jobs:
       - name: Python Semantic Release
         uses: relekang/python-semantic-release@master
         with:
-          additional_options: '--noop'
+          repository_username: __token__
+          repository_password: ${{ secrets.PYPI_TOKEN }}
