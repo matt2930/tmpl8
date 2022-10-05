@@ -19,8 +19,8 @@ class ArgInfo:
     arg: str
     arg_type: ArgType
     path: str = ''
-    files: set[str] = field(default_factory=set)
-    template_files: list[str] = field(default_factory=list)
+    files: set = field(default_factory=set)
+    template_files: list = field(default_factory=list)
     template_dir: str = ''
 
 
