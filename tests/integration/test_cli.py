@@ -96,26 +96,25 @@ tmpl8: error: argument -d/--data: invalid validateJsonData value: '{{"test":}}'
 )
 def setup(request):
 
-    with (patch.object(sys, 'argv', request.param.command),
-            patch('sys.stderr', new=StringIO()) as mock_stderr,
-            patch('sys.stdout', new=StringIO()) as mock_stdout):
+    with patch.object(sys, 'argv', request.param.command):
+        with patch('sys.stderr', new=StringIO()) as mock_stderr, patch('sys.stdout', new=StringIO()) as mock_stdout:
 
-        if request.param.expected_error:
-            try:
-                main()
-            except SystemExit as error:
-                return SetupOutput(
-                    actual_stderr=mock_stderr.getvalue(),
-                    expected_stderr=request.param.expected_stderr,
-                    actual_error=error,
-                    expected_error=request.param.expected_error
-                )
+            if request.param.expected_error:
+                try:
+                    main()
+                except SystemExit as error:
+                    return SetupOutput(
+                        actual_stderr=mock_stderr.getvalue(),
+                        expected_stderr=request.param.expected_stderr,
+                        actual_error=error,
+                        expected_error=request.param.expected_error
+                    )
 
-        main()
-        return SetupOutput(
-            actual_stdout=mock_stdout.getvalue(),
-            expected_stdout=request.param.expected_stdout,
-        )
+            main()
+            return SetupOutput(
+                actual_stdout=mock_stdout.getvalue(),
+                expected_stdout=request.param.expected_stdout,
+            )
 
 
 def test(setup):
