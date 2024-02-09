@@ -35,7 +35,7 @@ Running 'kubectl apply -f /tmp/dir/file.yml'
 
 $ tmpl8 -f test.json docker build -t test:latest -f Dockerfile .
 
-Running 'kubectl apply -t test:latest -f /tmp/dir/Dockerfile /tmp/dir'
+Running 'docker build -t test:latest -f /tmp/dir/Dockerfile /tmp/dir'
 
 <output from docker build>
 ```
